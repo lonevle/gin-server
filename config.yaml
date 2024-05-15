@@ -1,0 +1,13 @@
+zap:
+  level: info # 日志级别
+  format: console # 日志格式
+  prefix: "[github.com/lonevle/gin-server]" # 日志前缀
+  director: log # 日志目录
+  show-line: true # 显示代码行号
+  encode-level: LowercaseColorLevelEncoder # 编码级别
+  stacktrace-key: stacktrace
+  log-in-console: true # 日志输出到控制台
+  max-size: 10 # 单个日志文件最大大小
+  max-age: 30 # 日志文件最多保存天数
+  max-backups: 10 # 日志文件最多保存份数
+  compress: false # 是否压缩日志文件
