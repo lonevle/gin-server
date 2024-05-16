@@ -6,7 +6,7 @@ type Server struct {
 	// Redis   Redis   `mapstructure:"redis" json:"redis" yaml:"redis"`
 	// Mongo   Mongo   `mapstructure:"mongo" json:"mongo" yaml:"mongo"`
 	// Email   Email   `mapstructure:"email" json:"email" yaml:"email"`
-	// System  System  `mapstructure:"system" json:"system" yaml:"system"`
+	System System `mapstructure:"system" json:"system" yaml:"system"`
 	// Captcha Captcha `mapstructure:"captcha" json:"captcha" yaml:"captcha"`
 	// // auto
 	// AutoCode Autocode `mapstructure:"autocode" json:"autocode" yaml:"autocode"`
@@ -15,7 +15,7 @@ type Server struct {
 	// Mssql  Mssql           `mapstructure:"mssql" json:"mssql" yaml:"mssql"`
 	// Pgsql  Pgsql           `mapstructure:"pgsql" json:"pgsql" yaml:"pgsql"`
 	// Oracle Oracle          `mapstructure:"oracle" json:"oracle" yaml:"oracle"`
-	// Sqlite Sqlite          `mapstructure:"sqlite" json:"sqlite" yaml:"sqlite"`
+	Sqlite Sqlite `mapstructure:"sqlite" json:"sqlite" yaml:"sqlite"`
 	// DBList []SpecializedDB `mapstructure:"db-list" json:"db-list" yaml:"db-list"`
 	// // oss
 	// Local      Local      `mapstructure:"local" json:"local" yaml:"local"`
