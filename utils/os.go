@@ -65,3 +65,25 @@ func GetProgramPath() string {
 	}
 	return filepath.Dir(exePath)
 }
+
+// 拼接路径并转为绝对路径
+// 避免因注册服务导致工作路径错误的问题
+func JoinPath(path ...string) string {
+	if len(path) == 0 {
+		return ""
+	}
+
+	// 如果是绝对路径字节拼接
+	if filepath.IsAbs(path[0]) {
+
+		// 只有一个绝对路径直接返回
+		if len(path) == 1 {
+			return path[0]
+		}
+
+		return filepath.Join(path...)
+	} else {
+		// 否则添加程序所在目录拼接
+		return filepath.Join(GetProgramPath(), filepath.Join(path...))
+	}
+}

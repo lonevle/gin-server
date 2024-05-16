@@ -7,6 +7,7 @@ import (
 
 	"github.com/lonevle/gin-server/core/internal"
 	"github.com/lonevle/gin-server/global"
+	"github.com/lonevle/gin-server/utils"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/gin-gonic/gin"
@@ -25,13 +26,13 @@ func Viper(path ...string) *viper.Viper {
 			if configEnv := os.Getenv(internal.ConfigEnv); configEnv == "" { // 判断 internal.ConfigEnv 常量存储的环境变量是否为空
 				switch gin.Mode() {
 				case gin.DebugMode:
-					config = internal.ConfigDefaultFile
+					config = utils.JoinPath(internal.ConfigDefaultFile)
 					fmt.Printf("您正在使用gin模式的%s环境名称,config的路径为%s\n", gin.Mode(), internal.ConfigDefaultFile)
 				case gin.ReleaseMode:
-					config = internal.ConfigReleaseFile
+					config = utils.JoinPath(internal.ConfigReleaseFile)
 					fmt.Printf("您正在使用gin模式的%s环境名称,config的路径为%s\n", gin.Mode(), internal.ConfigReleaseFile)
 				case gin.TestMode:
-					config = internal.ConfigTestFile
+					config = utils.JoinPath(internal.ConfigTestFile)
 					fmt.Printf("您正在使用gin模式的%s环境名称,config的路径为%s\n", gin.Mode(), internal.ConfigTestFile)
 				}
 			} else { // internal.ConfigEnv 常量存储的环境变量不为空 将值赋值于config
@@ -55,7 +56,7 @@ func Viper(path ...string) *viper.Viper {
 	// 读取配置文件
 	err := v.ReadInConfig()
 	if err != nil {
-		panic(fmt.Errorf("Fatal error config file: %s \n", err))
+		panic(fmt.Errorf("fatal error config file: %s", err))
 	}
 	// 监听配置文件变化
 	v.WatchConfig()

@@ -2,9 +2,9 @@ package internal
 
 import (
 	"os"
-	"path/filepath"
 
 	"github.com/lonevle/gin-server/global"
+	"github.com/lonevle/gin-server/utils"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
@@ -14,15 +14,7 @@ var FileRotatelogs = new(fileRotatelogs)
 type fileRotatelogs struct{}
 
 func (r *fileRotatelogs) GetWriteSyncer(level string) zapcore.WriteSyncer {
-	var filename string
-
-	// 判断配置文件中的日志路径是否是绝对路径
-	if filepath.IsAbs(global.GS_CONFIG.Zap.Director) {
-		filename = filepath.Join(global.GS_CONFIG.Zap.Director, level+".log")
-	} else {
-		// 不是绝对路径，拼接日志文件的绝对路径, 避免注册服务导致日志文件路径错误
-		filename = filepath.Join(global.GS_ROOT, global.GS_CONFIG.Zap.Director, level+".log")
-	}
+	var filename = utils.JoinPath(global.GS_CONFIG.Zap.Director, level+".log") // 文件名
 
 	fileWriter := &lumberjack.Logger{
 		Filename:   filename,
